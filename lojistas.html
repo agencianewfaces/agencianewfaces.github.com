@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Lojistas</title>
+	<meta charset="utf-8">
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+	<meta name="description" content="Your description">
+	<meta name="keywords" content="Your keywords">
+	<meta name="author" content="Your name">
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/responsive.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/animation.css" type="text/css" media="screen">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/jquery-migrate-1.1.1.js"></script>
+	<script src="js/superfish.js"></script>
+	<script src="js/jquery.mobilemenu.js"></script>
+	<script src="js/jquery.cookie.js"></script>
+	<script src="js/jquery.equalheights.js"></script>
+	<script src="js/jquery.isotope.js"></script>
+	<script>
+	jQuery(window).load(function() {  
+		var jQuerycontainer = jQuery('#container');
+				//Run to initialise column sizes
+				updateSize();
+
+				//Load masonry when images all loaded
+				jQuerycontainer.imagesLoaded( function(){
+
+					jQuerycontainer.isotope({
+						// options
+						itemSelector : '.element',	
+						layoutMode : 'masonry',
+						transformsEnabled: false,
+						columnWidth: function( containerWidth ) {
+							containerWidth = jQuerybrowserWidth;
+							return Math.floor(containerWidth / jQuerycols);
+						}
+					});
+				});
+				
+					// update columnWidth on window resize
+					jQuery(window).smartresize(function(){  
+						updateSize();
+						jQuerycontainer.isotope( 'reLayout' );
+					});
+
+
+				//Set item size
+				function updateSize() {
+					jQuerybrowserWidth = jQuerycontainer.width();
+					jQuerycols = 6;
+
+					if (jQuerybrowserWidth >= 1200) {
+						jQuerycols = 6;
+					}
+					else if (jQuerybrowserWidth >= 800 && jQuerybrowserWidth < 1200) {
+						jQuerycols = 4;
+					}
+					else if (jQuerybrowserWidth >= 401 && jQuerybrowserWidth < 800) {
+						jQuerycols = 3;
+					}
+					else if (jQuerybrowserWidth < 401) {
+						jQuerycols = 1;
+					}
+
+					//console.log("Browser width is:" + jQuerybrowserWidth);
+					//console.log("Cols is:" + jQuerycols);
+
+					// jQuerygutterTotal = jQuerycols * 20;
+					jQuerybrowserWidth = jQuerybrowserWidth; // - jQuerygutterTotal;
+					jQueryitemWidth = jQuerybrowserWidth / jQuerycols;
+					jQueryitemWidth = Math.floor(jQueryitemWidth);
+
+					jQuery(".element").each(function(index){
+						jQuery(this).css({"width":jQueryitemWidth+"px"});             
+					});
+
+
+
+					var jQueryoptionSets = jQuery('#options .option-set'),
+					jQueryoptionLinks = jQueryoptionSets.find('a');
+
+					jQueryoptionLinks.click(function(){
+						var jQuerythis = jQuery(this);
+				// don't proceed if already selected
+				if ( jQuerythis.hasClass('selected') ) {
+					return false;
+				}
+				var jQueryoptionSet = jQuerythis.parents('.option-set');
+				jQueryoptionSet.find('.selected').removeClass('selected');
+				jQuerythis.addClass('selected');
+
+				// make option object dynamically, i.e. { filter: '.my-filter-class' }
+				var options = {},
+				key = jQueryoptionSet.attr('data-option-key'),
+				value = jQuerythis.attr('data-option-value');
+				// parse 'false' as false boolean
+				value = value === 'false' ? false : value;
+				options[ key ] = value;
+				if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+				  // changes in layout modes need extra logic
+				  changeLayoutMode( jQuerythis, options )
+				} else {
+				  // otherwise, apply new options
+				  jQuerycontainer.isotope( options );
+				}
+				
+				return false;
+			});
+				};
+			});
+</script>
+<!--[if lt IE 8]>
+        <div style='text-align:center'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/img/upgrade.jpg"border="0"alt=""/></a></div>  
+        <![endif]-->
+<!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/docs.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen">
+    <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="span12 clearfix">
+					<h1 class="brand"><a href="index.html"><img src="img/logo.png" alt="Fashion Agency"></a></h1>
+					<div class="navbar navbar_">
+						<div class="navbar-inner">
+							<div class="nav-collapse nav-collapse_ collapse">
+								<ul class="nav sf-menu clearfix">
+									<li><a href="#">Artesanart</a></li>
+				                    <li><a href="#">Talentos</a></li>
+				                    <li><a href="#">New Faces</a></li>
+				                    <li class="active"><a href="lojistas.html">Lojistas</a></li>
+				                    <li><a href="#">Contato</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="content" class="content-border">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h2 class="indent-4">Modelos</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span12">
+					<div id="options">
+						<ul id="filters" class="option-set clearfix" data-option-key="filter">
+							<li><a href="#filter" data-option-value="*" class="selected">Todos</a><span>|</span></li>
+							<li><a href="#filter" data-option-value=".male">Masculino</a><span>|</span></li>
+							<li><a href="#filter" data-option-value=".female">Feminino</a></li>
+						</ul>
+					</div>
+					<div id="container" class="clearfix">
+						<div class="element male" data-category="male">
+							<div class="isotope-block">
+								<div class="maxheight3">
+									<figure class="img-polaroid"><img src="img/page-3-img1.jpg" alt=""></figure>
+									<a href="#" class="link">David Brown</a><br>Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+								</div>
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img2.jpg" alt=""></figure>
+								<a href="#" class="link">Rachel Green</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img3.jpg" alt=""></figure>
+								<a href="#" class="link">Amber Rose</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img4.jpg" alt=""></figure>
+								<a href="#" class="link">Kate Russell</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img5.jpg" alt=""></figure>
+								<a href="#" class="link">Bradley Grosh</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img6.jpg" alt=""></figure>
+								<a href="#" class="link">Jessica Priston</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img7.jpg" alt=""></figure>
+								<a href="#" class="link">Monica Fox</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element male" data-category="male">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img8.jpg" alt=""></figure>
+								<a href="#" class="link">William Burns</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element male" data-category="male">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img9.jpg" alt=""></figure>
+								<a href="#" class="link">Sam Cunningham</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img10.jpg" alt=""></figure>
+								<a href="#" class="link">Jasmine McCoist</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img11.jpg" alt=""></figure>
+								<a href="#" class="link">Olivia Wilde</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+						<div class="element female" data-category="female">
+							<div class="isotope-block">
+								<figure class="img-polaroid"><img src="img/page-3-img12.jpg" alt=""></figure>
+								<a href="#" class="link">Carmen Harper</a><br> Lorem ipsum dolor sit amet, consectetur adip iscing elit.
+							</div>
+						</div>
+					</div>  
+				</div>
+			</div>
+		</div>
+	</div>
+	<aside>
+		<div class="container">
+			<div class="row">
+				<div class="span5">
+					<h3>Realização</h3>
+					<div class="box-2">
+						<div><figure class="img-polaroid"><a href="http://agencianewfaces.com.br"><img src="img/newfaces.png" alt=""></a></figure></div>
+					</div>
+				</div>
+				<div class="span3">
+					<h3>Matriz - Maracanaú</h3>
+					<ul class="list">
+						<li>(85) 3371.8816/8153.0684</li>
+						<li>Rua: 14, nº 431 - Jereissati I</li>
+					</ul>
+				</div>
+				<div class="span3">
+					<h3>Filial 1 - Fortaleza</h3>
+					<ul class="list">
+						<li>(85) 3491.3896/ 3491.8819</li>
+						<li>Rua: Alberto Magno, nº 1415 Shopping Montese, Piso 2 Sala 4 e 5</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</aside>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<span>Copyright &copy; 2013 <a href="http://www.agencianewfaces.com.br">Agência New Faces</a>  </span>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</body>
+</html>
